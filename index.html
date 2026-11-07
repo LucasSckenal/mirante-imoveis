@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mirante Imóveis · Casas de alto padrão pela vista</title>
+  <meta name="description" content="Casas e coberturas de alto padrão escolhidas pelo que se vê da janela: mar, serra, lago ou cidade.">
+  <meta name="theme-color" content="#e9e5dd">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Mirante Imóveis">
+  <meta property="og:description" content="Comece pela vista. A casa vem depois.">
+  <meta property="og:image" content="og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Comece pela Vista — Mirante Imóveis">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="preload" href="fontes/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=70&auto=format&fit=crop" fetchpriority="high">
+  <link rel="stylesheet" href="estilo.css">
+  <script>
+    (function () {
+      var h = document.documentElement; h.classList.add('js');
+      // Movimento só para quem não pediu menos movimento ao sistema. ?movimento=1 força, para prévia.
+      var pediuMenos = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!pediuMenos || new URLSearchParams(location.search).get('movimento') === '1') h.classList.add('movimento');
+    })();
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"RealEstateAgent","name":"Mirante Imóveis (exemplo)","url":"https://example.com"}
+  </script>
+</head>
+<body>
+  <a class="pular" href="#casas">Pular para as casas</a>
+
+  <main>
+    <section class="abertura" aria-labelledby="titulo">
+      <div class="moldura" id="moldura">
+        <img class="vista-img" id="vista-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=70&auto=format&fit=crop"
+             srcset="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=70&auto=format&fit=crop 900w,
+                     https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=70&auto=format&fit=crop 1600w,
+                     https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2400&q=70&auto=format&fit=crop 2400w"
+             sizes="100vw" alt="Vista do mar ao amanhecer" crossorigin="anonymous">
+        <canvas class="vista-gl" id="vista-gl" aria-hidden="true"></canvas>
+        <div class="veu" aria-hidden="true"></div>
+
+        <header class="topo">
+          <a class="marca" href="./" aria-label="Mirante Imóveis, início">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 24h26M7 24V13l9-6 9 6v11M12 24v-6h8v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            <span>Mirante Imóveis</span>
+          </a>
+          <nav class="nav" aria-label="Principal">
+            <a href="#topo" aria-current="page">Início</a>
+            <a href="#casas">Imóveis</a>
+            <a href="#vender">Vender</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#contato">Contato</a>
+          </nav>
+          <div class="topo-dir">
+            <a class="redondo" href="#casas" aria-label="Buscar imóveis">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </a>
+            <a class="btn btn-escuro btn-seta topo-cta" id="topo-whats" href="#contato">
+              <span>Falar com corretor</span>
+              <i class="seta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+            </a>
+          </div>
+        </header>
+
+        <!-- Trilho lateral: uma pílula só, com os atalhos e a próxima vista -->
+        <nav class="trilho" aria-label="Atalhos">
+          <a class="trilho-ico" href="#topo" aria-label="Início" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-5h-6v5H5a1 1 0 0 1-1-1z" fill="currentColor"/></svg></a>
+          <a class="trilho-ico" href="#casas" aria-label="Imóveis"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="5.5" height="5.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="13.5" y="5" width="5.5" height="5.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="13.5" width="5.5" height="5.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="13.5" y="13.5" width="5.5" height="5.5" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+          <a class="trilho-ico" href="#vender" aria-label="Vender"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="6" width="14" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 6V4.5h6V6M5 10h14" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+          <a class="trilho-ico" href="#casas" id="trilho-favoritas" aria-label="Casas da vista escolhida"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19s-7-4.2-7-9.4A3.8 3.8 0 0 1 12 7.4a3.8 3.8 0 0 1 7 2.2c0 5.2-7 9.4-7 9.4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></a>
+          <a class="trilho-ico" href="#contato" aria-label="Contato"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="5" width="15" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 20l3-3M8 10h8M8 13h5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></a>
+          <button type="button" class="trilho-prox" id="prox-vista" aria-label="Próxima vista: Serra">
+            <img id="prox-img" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=160&q=60&auto=format&fit=crop" alt="">
+          </button>
+        </nav>
+
+        <div class="tese" id="topo">
+          <div class="vistas" role="radiogroup" aria-label="O que você quer ver da janela" id="vistas">
+            <button type="button" role="radio" aria-checked="true" data-vista="mar">Mar</button><span aria-hidden="true">—</span>
+            <button type="button" role="radio" aria-checked="false" data-vista="serra">Serra</button><span aria-hidden="true">—</span>
+            <button type="button" role="radio" aria-checked="false" data-vista="lago">Lago</button><span aria-hidden="true">—</span>
+            <button type="button" role="radio" aria-checked="false" data-vista="cidade">Cidade</button>
+          </div>
+          <h1 id="titulo" class="titulo"><span class="linha"><span>Comece</span></span> <span class="linha"><span>pela <em>Vista</em></span></span></h1>
+          <p class="apoio">Casas de alto padrão escolhidas pelo que <br>se vê da janela: mar, serra, lago ou cidade.</p>
+          <div class="acoes">
+            <a class="btn btn-escuro" href="#casas" id="ver-casas">
+              <span id="ver-texto">Ver as casas</span>
+              <svg class="seta-solta" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <button type="button" class="play" id="passeio" aria-pressed="false">
+              <i><svg viewBox="0 0 24 24" aria-hidden="true"><path class="ico-play" d="M9.5 7.5l7 4.5-7 4.5z" fill="currentColor"/><path class="ico-pausa" d="M8.5 7.5h2.5v9H8.5zM13 7.5h2.5v9H13z" fill="currentColor"/></svg></i>
+              <span id="passeio-texto">Passear pelas vistas</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Ficha da vista, calculada dos imóveis -->
+        <ul class="ficha" id="ficha" aria-live="polite">
+          <li id="ficha-local">Litoral catarinense</li>
+          <li id="ficha-n">4 casas</li>
+          <li id="ficha-de">Desde R$ 4 mi</li>
+        </ul>
+
+        <!-- Os três cartões, dentro da moldura -->
+        <div class="paineis">
+          <article class="painel destaque" aria-labelledby="destaque-nome">
+            <div class="destaque-foto">
+              <span class="sobre">Destaque</span>
+              <img id="destaque-img" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=420&q=70&auto=format&fit=crop" alt="" width="600" height="450">
+              <div class="corretores" aria-label="Corretores responsáveis (exemplo)">
+                <span title="Ana Lima (exemplo)">AL</span><span title="Rafael Souza (exemplo)">RS</span><a href="#contato" id="corretor-mais" aria-label="Falar com um corretor">+</a>
+              </div>
+            </div>
+            <div class="destaque-texto">
+              <div class="destaque-cabeca">
+                <h2 id="destaque-nome">Casa Areia</h2>
+                <span class="contador tab" id="destaque-n">01 / 04</span>
+              </div>
+              <p id="destaque-desc">Jurerê Internacional · Florianópolis, SC</p>
+              <p class="destaque-preco tab" id="destaque-preco">R$ 11,8 mi <small>· 5 qts · 620 m²</small></p>
+              <a class="mais" id="destaque-link" href="#casas">Falar sobre ela <span aria-hidden="true">→</span></a>
+              <div class="destaque-pe">
+                <div class="tracos" id="tracos" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+                <div class="setas">
+                  <button type="button" class="redondo redondo-claro" id="destaque-ant" aria-label="Imóvel anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                  <button type="button" class="redondo redondo-escuro" id="destaque-prox" aria-label="Próximo imóvel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="painel numeros" id="sobre" aria-label="O que temos agora">
+            <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V5h8v15M13 9h6v11M3 20h18M8 8h2M8 11h2M8 14h2M16 12h1M16 15h1" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><b class="tab" id="n-imoveis">14</b><span>Imóveis à venda</span></div>
+            <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18l5-7 4 5 3-4 6 6z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><b class="tab" id="n-vistas">4</b><span>Tipos de vista</span></div>
+            <div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4 12h16M12 4c2.5 2.6 2.5 13.4 0 16M12 4c-2.5 2.6-2.5 13.4 0 16" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><b class="tab" id="n-cidades">8</b><span>Cidades</span></div>
+          </article>
+
+          <article class="painel chamada" id="vender" aria-labelledby="vender-titulo">
+            <div class="chamada-topo">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=160&q=60&auto=format&fit=crop" alt="" width="56" height="56">
+              <a class="redondo redondo-claro" id="vender-whats" href="#contato" aria-label="Avaliar minha casa no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+            <h2 id="vender-titulo">Tem uma casa<br>com vista?</h2>
+            <p>Avaliamos e mostramos só para quem procura aquela vista.</p>
+            <span class="barra" aria-hidden="true"><i id="barra-passeio"></i></span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- A folha: sobe por cima da abertura, que fica presa e encolhe até virar moldura -->
+    <div class="folha">
+    <!-- Resultado: filtrado pela vista escolhida acima. Sem JS, mostra todas. -->
+    <section class="casas" id="casas" aria-labelledby="casas-titulo" tabindex="-1">
+      <div class="casas-cabeca">
+        <div>
+          <p class="sobre sobre-escuro">Imóveis · <span id="casas-vista">Mar</span></p>
+          <h2 id="casas-titulo"><span id="casas-n">Todas as casas</span></h2>
+        </div>
+        <form class="filtros" id="filtros" onsubmit="return false">
+          <label class="campo">
+            <span class="rotulo">Quartos</span>
+            <select name="quartos" id="f-quartos">
+              <option value="0">Qualquer</option>
+              <option value="3">3 ou mais</option>
+              <option value="4">4 ou mais</option>
+              <option value="5">5 ou mais</option>
+            </select>
+          </label>
+          <label class="campo">
+            <span class="rotulo">Até</span>
+            <select name="ate" id="f-ate">
+              <option value="0">Sem limite</option>
+              <option value="4000000">R$ 4 milhões</option>
+              <option value="7000000">R$ 7 milhões</option>
+              <option value="12000000">R$ 12 milhões</option>
+            </select>
+          </label>
+        </form>
+      </div>
+
+      <ul class="grade" id="grade">
+<!-- casas:inicio — gerado por `node ferramentas/estatico.mjs`; o app.js redesenha com o filtro -->
+        <li class="casa" data-codigo="CD-402"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20CD-402%20(Cobertura%20Alta%2C%20Itaim%20Bibi)." target="_blank" rel="noopener" aria-label="Cobertura Alta, Itaim Bibi, R$ 14,5 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 960px) 100vw, 66vw" alt="Fachada da Cobertura Alta" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">CD-402</span></div><div class="casa-texto"><p class="casa-nome">Cobertura Alta</p><p class="casa-preco">R$ 14,5 mi</p><p class="casa-onde">Itaim Bibi · São Paulo, SP</p><p class="casa-ficha">4 qts · 480 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="CD-409"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20CD-409%20(Casa%20Cubo%2C%20Jardim%20Europa)." target="_blank" rel="noopener" aria-label="Casa Cubo, Jardim Europa, R$ 12,9 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Cubo" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">CD-409</span></div><div class="casa-texto"><p class="casa-nome">Casa Cubo</p><p class="casa-preco">R$ 12,9 mi</p><p class="casa-onde">Jardim Europa · São Paulo, SP</p><p class="casa-ficha">5 qts · 590 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="MR-104"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20MR-104%20(Casa%20Areia%2C%20Jurer%C3%AA%20Internacional)." target="_blank" rel="noopener" aria-label="Casa Areia, Jurerê Internacional, R$ 11,8 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Areia" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">MR-104</span></div><div class="casa-texto"><p class="casa-nome">Casa Areia</p><p class="casa-preco">R$ 11,8 mi</p><p class="casa-onde">Jurerê Internacional · Florianópolis, SC</p><p class="casa-ficha">5 qts · 620 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="LG-305"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20LG-305%20(Casa%20Espelho%2C%20Escarpas%20do%20Lago)." target="_blank" rel="noopener" aria-label="Casa Espelho, Escarpas do Lago, R$ 9,8 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Espelho" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">LG-305</span></div><div class="casa-texto"><p class="casa-nome">Casa Espelho</p><p class="casa-preco">R$ 9,8 mi</p><p class="casa-onde">Escarpas do Lago · Capitólio, MG</p><p class="casa-ficha">6 qts · 700 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="SR-207"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20SR-207%20(Casa%20do%20Vale%2C%20Capivari)." target="_blank" rel="noopener" aria-label="Casa do Vale, Capivari, R$ 8,7 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa do Vale" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">SR-207</span></div><div class="casa-texto"><p class="casa-nome">Casa do Vale</p><p class="casa-preco">R$ 8,7 mi</p><p class="casa-onde">Capivari · Campos do Jordão, SP</p><p class="casa-ficha">5 qts · 540 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="MR-118"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20MR-118%20(Casa%20das%20Varandas%2C%20Praia%20Brava)." target="_blank" rel="noopener" aria-label="Casa das Varandas, Praia Brava, R$ 6,9 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa das Varandas" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">MR-118</span></div><div class="casa-texto"><p class="casa-nome">Casa das Varandas</p><p class="casa-preco">R$ 6,9 mi</p><p class="casa-onde">Praia Brava · Itajaí, SC</p><p class="casa-ficha">4 qts · 410 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="CD-415"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20CD-415%20(Casa%20Ripada%2C%20Alto%20de%20Pinheiros)." target="_blank" rel="noopener" aria-label="Casa Ripada, Alto de Pinheiros, R$ 6,8 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Ripada" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">CD-415</span></div><div class="casa-texto"><p class="casa-nome">Casa Ripada</p><p class="casa-preco">R$ 6,8 mi</p><p class="casa-onde">Alto de Pinheiros · São Paulo, SP</p><p class="casa-ficha">4 qts · 400 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="MR-133"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20MR-133%20(Casa%20Mar%C3%A9%2C%20Praia%20do%20Rosa)." target="_blank" rel="noopener" aria-label="Casa Maré, Praia do Rosa, R$ 5,4 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Maré" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">MR-133</span></div><div class="casa-texto"><p class="casa-nome">Casa Maré</p><p class="casa-preco">R$ 5,4 mi</p><p class="casa-onde">Praia do Rosa · Imbituba, SC</p><p class="casa-ficha">4 qts · 350 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="LG-311"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20LG-311%20(Casa%20Pier%2C%20Escarpas%20do%20Lago)." target="_blank" rel="noopener" aria-label="Casa Pier, Escarpas do Lago, R$ 5,2 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Pier" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">LG-311</span></div><div class="casa-texto"><p class="casa-nome">Casa Pier</p><p class="casa-preco">R$ 5,2 mi</p><p class="casa-onde">Escarpas do Lago · Capitólio, MG</p><p class="casa-ficha">4 qts · 420 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="SR-212"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20SR-212%20(Casa%20da%20Figueira%2C%20Alto%20da%20Boa%20Vista)." target="_blank" rel="noopener" aria-label="Casa da Figueira, Alto da Boa Vista, R$ 4,6 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa da Figueira" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">SR-212</span></div><div class="casa-texto"><p class="casa-nome">Casa da Figueira</p><p class="casa-preco">R$ 4,6 mi</p><p class="casa-onde">Alto da Boa Vista · Campos do Jordão, SP</p><p class="casa-ficha">4 qts · 380 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="MR-121"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20MR-121%20(Casa%20Branca%2C%20Lagoinha)." target="_blank" rel="noopener" aria-label="Casa Branca, Lagoinha, R$ 4 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Branca" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">MR-121</span></div><div class="casa-texto"><p class="casa-nome">Casa Branca</p><p class="casa-preco">R$ 4 mi</p><p class="casa-onde">Lagoinha · Florianópolis, SC</p><p class="casa-ficha">3 qts · 280 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="CD-420"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20CD-420%20(Loft%20Panorama%2C%20Vila%20Nova%20Concei%C3%A7%C3%A3o)." target="_blank" rel="noopener" aria-label="Loft Panorama, Vila Nova Conceição, R$ 3,9 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Loft Panorama" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">CD-420</span></div><div class="casa-texto"><p class="casa-nome">Loft Panorama</p><p class="casa-preco">R$ 3,9 mi</p><p class="casa-onde">Vila Nova Conceição · São Paulo, SP</p><p class="casa-ficha">2 qts · 190 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="LG-318"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20LG-318%20(Casa%20Varanda%2C%20Condom%C3%ADnio%20Marina)." target="_blank" rel="noopener" aria-label="Casa Varanda, Condomínio Marina, R$ 3,4 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Varanda" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">LG-318</span></div><div class="casa-texto"><p class="casa-nome">Casa Varanda</p><p class="casa-preco">R$ 3,4 mi</p><p class="casa-onde">Condomínio Marina · Guapé, MG</p><p class="casa-ficha">4 qts · 330 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+        <li class="casa" data-codigo="SR-219"><a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20saber%20mais%20do%20im%C3%B3vel%20SR-219%20(Casa%20Pedra%2C%20Vila%20Su%C3%AD%C3%A7a)." target="_blank" rel="noopener" aria-label="Casa Pedra, Vila Suíça, R$ 2,9 mi. Falar com corretor no WhatsApp"><div class="casa-foto"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=70&auto=format&fit=crop 1600w" sizes="(max-width: 760px) 100vw, (max-width: 960px) 50vw, 33vw" alt="Fachada da Casa Pedra" loading="lazy" decoding="async" width="800" height="600"><span class="casa-codigo tab">SR-219</span></div><div class="casa-texto"><p class="casa-nome">Casa Pedra</p><p class="casa-preco">R$ 2,9 mi</p><p class="casa-onde">Vila Suíça · Gonçalves, MG</p><p class="casa-ficha">3 qts · 260 m²</p><span class="casa-acao">Falar sobre esta casa</span></div></a></li>
+<!-- casas:fim -->
+      </ul>
+
+      <div class="vazio" id="vazio" hidden>
+        <p class="vazio-titulo">Nenhuma casa com esses filtros.</p>
+        <p>Tire um dos filtros ou escolha outra vista. <button type="button" class="link" id="limpar">Tirar os filtros</button></p>
+      </div>
+      <p class="nota-exemplo">Imóveis, preços e fotos de exemplo.</p>
+    </section>
+    </div>
+  </main>
+
+  <footer class="rodape" id="contato">
+    <div class="rodape-linha">
+      <p class="rodape-frase">Diga a vista. A gente acha a casa.</p>
+      <a class="btn btn-escuro btn-seta" id="rodape-whats" href="#">
+        <span>Conversar no WhatsApp</span>
+        <i class="seta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+      </a>
+    </div>
+    <dl class="dados">
+      <div><dt>Endereço</dt><dd>Rua de Exemplo, 000 · Cidade, UF</dd></div>
+      <div><dt>CRECI</dt><dd class="tab">00000-J (exemplo)</dd></div>
+      <div><dt>Atendimento</dt><dd>Seg a sáb, 9h às 19h</dd></div>
+    </dl>
+    <p class="rodape-pe">
+      <a class="marca marca-escura" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 24h26M7 24V13l9-6 9 6v11M12 24v-6h8v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Mirante</span></a>
+      <span>© <span id="ano">2026</span> · modelo de site</span>
+      <a href="privacidade.html">Privacidade</a>
+    </p>
+  </footer>
+
+  <script src="imoveis.js"></script>
+  <script src="cartao.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
